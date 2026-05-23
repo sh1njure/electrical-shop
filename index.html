@@ -1027,7 +1027,10 @@
     <div class="invite-card">
       <div class="invite-code-display" id="inviteCodeDisplay">••••••</div>
       <div class="invite-code-sub">Share this code with friends so they can add you</div>
-      <button class="invite-copy-btn" onclick="copyInviteCode()">Copy code</button>
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <button class="invite-copy-btn" onclick="copyInviteCode()">Copy code</button>
+        <button class="invite-copy-btn" style="background:var(--separator);color:var(--label);" onclick="verifyInviteInDB()">Verify in DB</button>
+      </div>
     </div>
   </div>
 
@@ -1619,7 +1622,7 @@ async function sbUpdateProfile(name, color) {
 
 // ── Real friends from Supabase ──
 async function loadRealFriends() {
-  if (!db || !sbOnline) {
+  if (!db) {
     document.getElementById('friendsSyncBanner').style.display = '';
     return null;
   }
@@ -1675,6 +1678,21 @@ async function loadRealFriends() {
 function showInviteCode() {
   const code = localStorage.getItem('invite_code') || '------';
   document.getElementById('inviteCodeDisplay').textContent = code;
+}
+
+async function verifyInviteInDB() {
+  if (!db) { showToast('No DB connection'); return; }
+  const localCode = localStorage.getItem('invite_code');
+  if (!localCode) { showToast('No local code — reload page'); return; }
+  const { data, error } = await db.from('invite_codes').select('code,user_id').eq('code', localCode).maybeSingle();
+  if (error) { showToast('DB error: ' + error.message); return; }
+  if (!data) {
+    const { error: e2 } = await db.from('invite_codes').insert({ code: localCode, user_id: DEVICE_ID });
+    if (e2) showToast('Re-insert failed: ' + e2.message);
+    else showToast('Code re-saved to DB ✓ — retry adding friend');
+  } else {
+    showToast('Code verified in DB ✓');
+  }
 }
 
 function copyInviteCode() {
@@ -1821,8 +1839,8 @@ async function saveFriend() {
   const code = document.getElementById('friendCodeInput').value.trim().toUpperCase();
   if (!code || code.length < 4) { showToast('Enter a valid code'); return; }
 
-  if (!db || !sbOnline) {
-    showToast('Connect Supabase to add real friends');
+  if (!db) {
+    showToast('Supabase not connected');
     return;
   }
 
@@ -1831,27 +1849,32 @@ async function saveFriend() {
 
   try {
     // look up the invite code
-    const { data: inv } = await db.from('invite_codes').select('user_id').eq('code', code).maybeSingle();
-    if (!inv) { showToast('Code not found'); btn.textContent = 'Add'; btn.disabled = false; return; }
+    const { data: inv, error: invErr } = await db
+      .from('invite_codes').select('user_id').eq('code', code).maybeSingle();
+
+    if (invErr) { showToast('Error: ' + invErr.message); btn.textContent = 'Add'; btn.disabled = false; return; }
+    if (!inv) { showToast('Code not found — check it and try again'); btn.textContent = 'Add'; btn.disabled = false; return; }
     if (inv.user_id === DEVICE_ID) { showToast("That's your own code!"); btn.textContent = 'Add'; btn.disabled = false; return; }
 
     // check not already friends
-    const { data: existing } = await db.from('friendships').select('id').eq('user_id', DEVICE_ID).eq('friend_id', inv.user_id).maybeSingle();
+    const { data: existing } = await db.from('friendships')
+      .select('id').eq('user_id', DEVICE_ID).eq('friend_id', inv.user_id).maybeSingle();
     if (existing) { showToast('Already friends!'); btn.textContent = 'Add'; btn.disabled = false; return; }
 
     // add both directions
-    await db.from('friendships').insert([
+    const { error: fErr } = await db.from('friendships').insert([
       { user_id: DEVICE_ID,   friend_id: inv.user_id },
       { user_id: inv.user_id, friend_id: DEVICE_ID   }
     ]);
+    if (fErr) { showToast('Error: ' + fErr.message); btn.textContent = 'Add'; btn.disabled = false; return; }
 
     // get their name
     const { data: u } = await db.from('users').select('name').eq('id', inv.user_id).maybeSingle();
     closeFriendModal();
     renderLeaderboard();
-    showToast(`${u?.name || 'Friend'} added!`);
+    showToast(`${u?.name || 'Friend'} added! 🎉`);
   } catch(e) {
-    showToast('Error: ' + e.message);
+    showToast('Error: ' + (e.message || 'unknown'));
   }
   btn.textContent = 'Add'; btn.disabled = false;
 }
