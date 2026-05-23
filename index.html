@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Habits</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
@@ -580,6 +581,45 @@
     .friend-row.show-del .del-btn { display: block; }
     .friend-row.show-del .friend-streak { opacity: 0; }
 
+    /* ── Invite card ── */
+    .invite-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .invite-code-display {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 8px;
+      color: var(--accent);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .invite-code-sub {
+      font-size: 13px;
+      color: var(--sublabel);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .invite-copy-btn {
+      margin-top: 4px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 9px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .invite-copy-btn:active { opacity: 0.7; }
+
     /* ── Stats view ── */
     .stats-overview {
       display: grid;
@@ -975,25 +1015,36 @@
 
 <!-- ══ FRIENDS VIEW ══ -->
 <div class="view" id="viewFriends">
+
+  <!-- Sync status -->
+  <div id="friendsSyncBanner" style="display:none;background:var(--orange);color:white;font-size:13px;font-weight:600;text-align:center;padding:8px;">
+    ⚠️ Offline — connect Supabase to enable real friends
+  </div>
+
+  <!-- Your invite code -->
   <div class="section" style="padding-top:20px;">
+    <div class="section-title">Your invite code</div>
+    <div class="invite-card">
+      <div class="invite-code-display" id="inviteCodeDisplay">••••••</div>
+      <div class="invite-code-sub">Share this code with friends so they can add you</div>
+      <button class="invite-copy-btn" onclick="copyInviteCode()">Copy code</button>
+    </div>
+  </div>
+
+  <!-- Add by code -->
+  <div class="section" style="padding-top:14px;">
+    <button class="add-friend-btn" onclick="openFriendModal()">
+      <div class="plus-circle">+</div>
+      Add friend by code
+    </button>
+  </div>
+
+  <!-- Leaderboard -->
+  <div class="section" style="padding-top:20px; padding-bottom:8px;">
     <div class="section-title">Leaderboard</div>
     <div class="leaderboard" id="leaderboard"></div>
   </div>
-  <div class="section" style="padding-top:12px;">
-    <button class="add-friend-btn" onclick="openFriendModal()">
-      <div class="plus-circle">+</div>
-      Add a friend
-    </button>
-  </div>
-  <div class="section" style="padding-top:20px; padding-bottom:8px;">
-    <div class="section-title">About Friends</div>
-    <div class="tips-card">
-      <div class="tip-row">🏆 Rankings are sorted by current streak</div>
-      <div class="tip-row">📊 Weekly bar shows 7-day completion rate</div>
-      <div class="tip-row">👆 Long-press a friend to remove them</div>
-      <div class="tip-row">🔄 Stats update as you complete habits</div>
-    </div>
-  </div>
+
 </div><!-- /viewFriends -->
 
 <!-- ══ STATS VIEW ══ -->
@@ -1123,16 +1174,17 @@
     <div class="modal-header">
       <button class="modal-cancel" onclick="closeFriendModal()">Cancel</button>
       <div class="modal-title">Add Friend</div>
-      <button class="modal-save" onclick="saveFriend()">Add</button>
+      <button class="modal-save" id="friendAddBtn" onclick="saveFriend()">Add</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <div class="form-label">Name</div>
-        <input class="form-input" id="friendNameInput" type="text" placeholder="e.g. Alex" maxlength="24" />
+        <div class="form-label">Friend's invite code</div>
+        <input class="form-input" id="friendCodeInput" type="text"
+          placeholder="e.g. A3K9XZ" maxlength="6"
+          style="text-transform:uppercase;letter-spacing:4px;font-size:22px;font-weight:700;" />
       </div>
-      <div class="form-group">
-        <div class="form-label">Avatar color</div>
-        <div class="color-row" id="friendColorRow"></div>
+      <div style="font-size:13px;color:var(--sublabel);padding:0 2px;">
+        Ask your friend to share their 6-letter code from the Friends tab.
       </div>
     </div>
   </div>
@@ -1204,8 +1256,28 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ══ SUPABASE CONFIG — replace these two values ══
+const SUPABASE_URL  = 'YOUR_SUPABASE_URL';
+const SUPABASE_KEY  = 'YOUR_SUPABASE_ANON_KEY';
+
 const EMOJIS = ['🏃','💧','📚','🧘','🍎','💪','😴','🎯','✍️','🎵','🌿','🧹','💊','🐾','🌅'];
 const COLORS = ['#007aff','#34c759','#ff9500','#ff2d55','#af52de','#5ac8fa','#ff3b30','#5856d6','#ff6b6b','#30d158'];
+
+// ── Device identity ──
+let DEVICE_ID = localStorage.getItem('device_id');
+if (!DEVICE_ID) {
+  DEVICE_ID = 'u_' + Math.random().toString(36).slice(2, 10) + Math.random().toString(36).slice(2, 10);
+  localStorage.setItem('device_id', DEVICE_ID);
+}
+
+// ── Supabase client (null when not configured) ──
+let db = null;
+let sbOnline = false;
+try {
+  if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+} catch(e) { console.warn('Supabase init failed', e); }
 
 let habits = JSON.parse(localStorage.getItem('habits_v2') || '[]');
 let completions = JSON.parse(localStorage.getItem('completions_v2') || '{}');
@@ -1226,6 +1298,7 @@ function save() {
   localStorage.setItem('completions_v2', JSON.stringify(completions));
 }
 
+
 function isCompleted(habitId, key) {
   return (completions[key] || []).includes(habitId);
 }
@@ -1234,14 +1307,12 @@ function toggleHabit(habitId) {
   const key = todayKey();
   if (!completions[key]) completions[key] = [];
   const idx = completions[key].indexOf(habitId);
-  if (idx === -1) {
-    completions[key].push(habitId);
-    triggerHaptic();
-  } else {
-    completions[key].splice(idx, 1);
-  }
+  const done = idx === -1;
+  if (done) { completions[key].push(habitId); triggerHaptic(); }
+  else { completions[key].splice(idx, 1); }
   save();
   render();
+  sbSetCompletion(habitId, key, done);
 }
 
 function getStreak(habitId) {
@@ -1435,11 +1506,13 @@ function handleOverlayClick(e) {
 function saveHabit() {
   const name = document.getElementById('habitNameInput').value.trim();
   if (!name) { showToast('Please enter a habit name'); return; }
-  habits.push({ id: Date.now().toString(), name, emoji: selectedEmoji, color: selectedColor });
+  const h = { id: Date.now().toString(), name, emoji: selectedEmoji, color: selectedColor };
+  habits.push(h);
   save();
   closeModal();
   render();
   showToast('Habit added!');
+  sbSaveHabit(h);
 }
 
 // ── Toast ──
@@ -1469,8 +1542,151 @@ if (!habits.length) {
   save();
 }
 
+// ══ SUPABASE SYNC ══
+
+async function sbInit() {
+  if (!db) return;
+  try {
+    // upsert this device as a user
+    const p = JSON.parse(localStorage.getItem('profile_v1') || '{}');
+    await db.from('users').upsert({
+      id: DEVICE_ID,
+      name: p.name || 'You',
+      color: p.color || '#007aff'
+    }, { onConflict: 'id' });
+
+    // ensure invite code exists
+    const { data: existing } = await db.from('invite_codes').select('code').eq('user_id', DEVICE_ID).maybeSingle();
+    if (!existing) {
+      const code = Math.random().toString(36).slice(2, 8).toUpperCase();
+      await db.from('invite_codes').insert({ code, user_id: DEVICE_ID });
+      localStorage.setItem('invite_code', code);
+    } else {
+      localStorage.setItem('invite_code', existing.code);
+    }
+
+    sbOnline = true;
+    document.getElementById('friendsSyncBanner').style.display = 'none';
+
+    // push local habits to Supabase (upsert)
+    if (habits.length) {
+      await db.from('habits').upsert(
+        habits.map(h => ({ ...h, user_id: DEVICE_ID })),
+        { onConflict: 'id' }
+      );
+    }
+
+    // push local completions
+    const rows = [];
+    Object.entries(completions).forEach(([date, ids]) => {
+      ids.forEach(habit_id => {
+        if (habits.find(h => h.id === habit_id))
+          rows.push({ user_id: DEVICE_ID, habit_id, date });
+      });
+    });
+    if (rows.length) {
+      await db.from('completions').upsert(rows, { onConflict: 'habit_id,date', ignoreDuplicates: true });
+    }
+
+  } catch(e) {
+    console.warn('sbInit error', e);
+  }
+}
+
+async function sbSaveHabit(h) {
+  if (!db || !sbOnline) return;
+  await db.from('habits').upsert({ ...h, user_id: DEVICE_ID }, { onConflict: 'id' });
+}
+
+async function sbDeleteHabit(id) {
+  if (!db || !sbOnline) return;
+  await db.from('habits').delete().eq('id', id);
+}
+
+async function sbSetCompletion(habit_id, date, done) {
+  if (!db || !sbOnline) return;
+  if (done) {
+    await db.from('completions').upsert({ user_id: DEVICE_ID, habit_id, date }, { onConflict: 'habit_id,date', ignoreDuplicates: true });
+  } else {
+    await db.from('completions').delete().eq('habit_id', habit_id).eq('date', date);
+  }
+}
+
+async function sbUpdateProfile(name, color) {
+  if (!db || !sbOnline) return;
+  await db.from('users').update({ name, color }).eq('id', DEVICE_ID);
+}
+
+// ── Real friends from Supabase ──
+async function loadRealFriends() {
+  if (!db || !sbOnline) {
+    document.getElementById('friendsSyncBanner').style.display = '';
+    return null;
+  }
+  try {
+    // get friend IDs
+    const { data: fships } = await db.from('friendships').select('friend_id').eq('user_id', DEVICE_ID);
+    if (!fships || !fships.length) return [];
+
+    const friendIds = fships.map(f => f.friend_id);
+
+    // get their profiles
+    const { data: users } = await db.from('users').select('id,name,color').in('id', friendIds);
+
+    // get their completions for streak calc
+    const results = await Promise.all((users || []).map(async u => {
+      const { data: comps } = await db.from('completions').select('date').eq('user_id', u.id);
+      const { data: habs }  = await db.from('habits').select('id').eq('user_id', u.id);
+      const habitCount = habs?.length || 1;
+
+      // build completions map
+      const compMap = {};
+      (comps || []).forEach(c => { compMap[c.date] = (compMap[c.date] || 0) + 1; });
+
+      // streak
+      let streak = 0;
+      const d = new Date();
+      while (true) {
+        const k = dateKey(d);
+        if (!compMap[k]) break;
+        streak++;
+        d.setDate(d.getDate() - 1);
+      }
+
+      // week rate
+      let weekDone = 0;
+      for (let i = 0; i < 7; i++) {
+        const dd = new Date(); dd.setDate(dd.getDate() - i);
+        const cnt = compMap[dateKey(dd)] || 0;
+        weekDone += Math.min(cnt / habitCount, 1);
+      }
+      const weekRate = Math.round((weekDone / 7) * 100);
+
+      return { id: u.id, name: u.name, color: u.color, streak, weekRate };
+    }));
+    return results;
+  } catch(e) {
+    console.warn('loadRealFriends error', e);
+    return null;
+  }
+}
+
+// ── Invite code display ──
+function showInviteCode() {
+  const code = localStorage.getItem('invite_code') || '------';
+  document.getElementById('inviteCodeDisplay').textContent = code;
+}
+
+function copyInviteCode() {
+  const code = localStorage.getItem('invite_code');
+  if (!code) { showToast('Connect Supabase first'); return; }
+  navigator.clipboard?.writeText(code).then(() => showToast('Code copied: ' + code))
+    .catch(() => showToast('Your code: ' + code));
+}
+
 setDateLabel();
 render();
+sbInit();
 
 // ══ TAB SWITCHING ══
 let currentTab = 'today';
@@ -1533,10 +1749,17 @@ function rankLabel(i) {
   return { text: `${i + 1}`, cls: '' };
 }
 
-function renderLeaderboard() {
-  const me = { id: 'me', name: 'You', color: '#007aff', streak: myStreak(), weekRate: myWeekRate(), isMe: true };
-  const all = [me, ...friends].sort((a, b) => b.streak - a.streak || b.weekRate - a.weekRate);
+async function renderLeaderboard() {
+  showInviteCode();
   const lb = document.getElementById('leaderboard');
+  lb.innerHTML = '<div style="padding:20px;text-align:center;color:var(--sublabel);font-size:14px;">Loading…</div>';
+
+  const realFriends = await loadRealFriends();
+  const friendList = realFriends !== null ? realFriends : friends;
+
+  const p = JSON.parse(localStorage.getItem('profile_v1') || '{}');
+  const me = { id: 'me', name: p.name || 'You', color: p.color || '#007aff', streak: myStreak(), weekRate: myWeekRate(), isMe: true };
+  const all = [me, ...friendList].sort((a, b) => b.streak - a.streak || b.weekRate - a.weekRate);
   lb.innerHTML = '';
   all.forEach((person, i) => {
     const rank = rankLabel(i);
@@ -1581,23 +1804,9 @@ function removeFriend(id) {
 let selectedFriendColor = COLORS[3];
 
 function openFriendModal() {
-  selectedFriendColor = COLORS[Math.floor(Math.random() * COLORS.length)];
-  document.getElementById('friendNameInput').value = '';
-  const cr = document.getElementById('friendColorRow');
-  cr.innerHTML = '';
-  COLORS.forEach(c => {
-    const dot = document.createElement('div');
-    dot.className = 'color-dot' + (c === selectedFriendColor ? ' selected' : '');
-    dot.style.background = c;
-    dot.onclick = () => {
-      selectedFriendColor = c;
-      document.querySelectorAll('#friendColorRow .color-dot').forEach(d => d.classList.remove('selected'));
-      dot.classList.add('selected');
-    };
-    cr.appendChild(dot);
-  });
+  document.getElementById('friendCodeInput').value = '';
   document.getElementById('friendModalOverlay').classList.add('open');
-  setTimeout(() => document.getElementById('friendNameInput').focus(), 350);
+  setTimeout(() => document.getElementById('friendCodeInput').focus(), 350);
 }
 
 function closeFriendModal() {
@@ -1608,19 +1817,46 @@ function handleFriendOverlayClick(e) {
   if (e.target === document.getElementById('friendModalOverlay')) closeFriendModal();
 }
 
-function saveFriend() {
-  const name = document.getElementById('friendNameInput').value.trim();
-  if (!name) { showToast('Enter a name'); return; }
-  const streak = Math.floor(Math.random() * 12);
-  const weekRate = Math.floor(Math.random() * 60) + 30;
-  friends.push({ id: Date.now().toString(), name, color: selectedFriendColor, streak, weekRate });
-  saveFriends();
-  closeFriendModal();
-  renderLeaderboard();
-  showToast(`${name} added!`);
+async function saveFriend() {
+  const code = document.getElementById('friendCodeInput').value.trim().toUpperCase();
+  if (!code || code.length < 4) { showToast('Enter a valid code'); return; }
+
+  if (!db || !sbOnline) {
+    showToast('Connect Supabase to add real friends');
+    return;
+  }
+
+  const btn = document.getElementById('friendAddBtn');
+  btn.textContent = '…'; btn.disabled = true;
+
+  try {
+    // look up the invite code
+    const { data: inv } = await db.from('invite_codes').select('user_id').eq('code', code).maybeSingle();
+    if (!inv) { showToast('Code not found'); btn.textContent = 'Add'; btn.disabled = false; return; }
+    if (inv.user_id === DEVICE_ID) { showToast("That's your own code!"); btn.textContent = 'Add'; btn.disabled = false; return; }
+
+    // check not already friends
+    const { data: existing } = await db.from('friendships').select('id').eq('user_id', DEVICE_ID).eq('friend_id', inv.user_id).maybeSingle();
+    if (existing) { showToast('Already friends!'); btn.textContent = 'Add'; btn.disabled = false; return; }
+
+    // add both directions
+    await db.from('friendships').insert([
+      { user_id: DEVICE_ID,   friend_id: inv.user_id },
+      { user_id: inv.user_id, friend_id: DEVICE_ID   }
+    ]);
+
+    // get their name
+    const { data: u } = await db.from('users').select('name').eq('id', inv.user_id).maybeSingle();
+    closeFriendModal();
+    renderLeaderboard();
+    showToast(`${u?.name || 'Friend'} added!`);
+  } catch(e) {
+    showToast('Error: ' + e.message);
+  }
+  btn.textContent = 'Add'; btn.disabled = false;
 }
 
-document.getElementById('friendNameInput').addEventListener('keydown', e => {
+document.getElementById('friendCodeInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') saveFriend();
 });
 
@@ -1695,6 +1931,7 @@ function saveProfile() {
   closeProfileModal();
   renderProfile();
   showToast('Profile updated!');
+  sbUpdateProfile(profile.name, profile.color);
 }
 document.getElementById('profileNameInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') saveProfile();
@@ -1727,6 +1964,7 @@ function saveAvatarColor() {
   closeColorModal();
   renderProfile();
   showToast('Color updated!');
+  sbUpdateProfile(profile.name, profile.color);
 }
 
 function exportData() {
