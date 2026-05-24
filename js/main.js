@@ -303,9 +303,9 @@ function initProductVatToggle() {
   const priceEl = document.getElementById('product-price-display');
   const vatLabelEl = document.getElementById('price-vat-label');
   if (!toggle || !priceEl) return;
-  const basePrice = parseFloat(priceEl.dataset.basePrice || 0);
   const VAT = 0.23;
   toggle.addEventListener('change', () => {
+    const basePrice = parseFloat(priceEl.dataset.basePrice || 0);
     const inclVat = toggle.checked;
     priceEl.textContent = '€' + (basePrice * (inclVat ? 1 + VAT : 1)).toFixed(2);
     if (vatLabelEl) vatLabelEl.textContent = inclVat ? 'inc. VAT' : 'ex. VAT';
