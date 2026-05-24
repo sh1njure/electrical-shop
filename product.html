@@ -588,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (relatedGrid) relatedGrid.innerHTML = related.map(p => Filters.renderProductCard(p)).join('');
 
   /* Reviews */
-  Reviews.renderList(product.id);
+  Reviews.loadAndRender(product.id);
   Reviews.initForm(product.id);
 });
 </script>
