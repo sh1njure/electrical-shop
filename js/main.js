@@ -240,14 +240,8 @@ function initNavDropdowns() {
   document.querySelectorAll('.nav-item-has-dropdown').forEach(item => {
     const menu = item.querySelector('.nav-dropdown');
     if (!menu) return;
-    let timer;
-    item.addEventListener('mouseenter', () => {
-      clearTimeout(timer);
-      menu.classList.add('open');
-    });
-    item.addEventListener('mouseleave', () => {
-      timer = setTimeout(() => menu.classList.remove('open'), 150);
-    });
+    item.addEventListener('mouseenter', () => menu.classList.add('open'));
+    item.addEventListener('mouseleave', () => menu.classList.remove('open'));
   });
 }
 
