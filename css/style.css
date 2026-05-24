@@ -441,11 +441,8 @@ svg { flex-shrink: 0; }
 .mega-cat-col {
   padding: 16px 14px;
   border-right: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
 }
-.mega-cat-col:nth-child(5),
-.mega-cat-col:nth-child(10) { border-right: none; }
-.mega-cat-col:nth-child(n+6) { border-bottom: none; }
+.mega-cat-col:nth-child(5) { border-right: none; }
 
 .mega-cat-title {
   display: flex;
