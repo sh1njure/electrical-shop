@@ -2004,3 +2004,24 @@ footer {
   .review-form-grid { grid-template-columns: 1fr; }
   .reviews-section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
+
+/* ── Brand chips ─────────────────────────────────────────────── */
+.brand-chip {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color .18s, border-color .18s, transform .18s, box-shadow .18s;
+  cursor: pointer;
+}
+.brand-chip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(249,115,22,.15);
+}
