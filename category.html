@@ -351,6 +351,9 @@
           <p id="category-desc" style="font-size:14px;color:var(--text-secondary)">Professional LED lighting solutions for every application — panels, downlights, battens, high bays, floodlights and more.</p>
         </div>
 
+        <!-- Subcategory pills -->
+        <nav class="subcats-nav" id="subcats-nav" aria-label="Subcategories"></nav>
+
         <!-- Active filter chips -->
         <div class="active-filters-bar" id="active-filters">
           <button id="clear-all-chips" class="btn btn-ghost btn-sm" style="display:none">Clear All Filters</button>
@@ -519,6 +522,108 @@ document.addEventListener('DOMContentLoaded', () => {
   if (products.length === 0) products = PRODUCTS.slice(0, 12);
 
   Filters.init(products);
+
+  /* Subcategory pills */
+  const SUBCATS = {
+    'led-lighting': [
+      { key: 'panels',      label: 'LED Panels 600×600mm' },
+      { key: 'downlights',  label: 'GU10 / GU5.3 Downlights' },
+      { key: 'battens',     label: 'Battens & Tubes' },
+      { key: 'floodlights', label: 'Floodlights IP65' },
+      { key: 'high-bays',   label: 'High Bay & UFO' },
+      { key: 'strips',      label: 'LED Strip Lights' },
+      { key: 'emergency',   label: 'Emergency & Bulkheads' },
+    ],
+    'showroom-lighting': [
+      { key: 'track',        label: 'Track & Rail Systems' },
+      { key: 'pendants',     label: 'Pendant Lights' },
+      { key: 'spotlights',   label: 'Adjustable Spotlights' },
+      { key: 'architectural',label: 'Architectural Lighting' },
+      { key: 'display',      label: 'Display & Accent' },
+      { key: 'recessed',     label: 'Recessed Ceiling' },
+    ],
+    'wiring-accessories': [
+      { key: 'sockets',   label: 'Sockets & Outlets' },
+      { key: 'switches',  label: 'Light Switches' },
+      { key: 'dimmers',   label: 'Dimmers & Controllers' },
+      { key: 'usb',       label: 'USB Charging Sockets' },
+      { key: 'outdoor',   label: 'Outdoor Sockets IP66' },
+      { key: 'extension', label: 'Extension Leads' },
+      { key: 'grid',      label: 'Grid Systems' },
+    ],
+    'heating-ventilation': [
+      { key: 'heaters',    label: 'Panel Heaters' },
+      { key: 'infrared',   label: 'Infrared Panels' },
+      { key: 'thermostat', label: 'Thermostats' },
+      { key: 'fans',       label: 'Extractor Fans' },
+      { key: 'mvhr',       label: 'MVHR & Heat Recovery' },
+      { key: 'towel',      label: 'Electric Towel Rails' },
+    ],
+    'cable': [
+      { key: 'te',      label: 'Twin & Earth (T&E)' },
+      { key: 'swa',     label: 'SWA Armoured' },
+      { key: 'flex',    label: 'Flexible 3-Core' },
+      { key: 'data',    label: 'Cat5e / Cat6 Data' },
+      { key: 'coax',    label: 'Coaxial (RG6)' },
+      { key: 'fire',    label: 'Fire Resistant' },
+      { key: 'singles', label: 'Singles & Submains' },
+    ],
+    'cable-management': [
+      { key: 'trunking', label: 'PVC Trunking' },
+      { key: 'conduit',  label: 'Conduit & Fittings' },
+      { key: 'trays',    label: 'Cable Trays & Ladders' },
+      { key: 'boxes',    label: 'Back Boxes' },
+      { key: 'junction', label: 'Junction Boxes' },
+      { key: 'clips',    label: 'Cable Clips & Saddles' },
+    ],
+    'switchgear': [
+      { key: 'cu',        label: 'Consumer Units' },
+      { key: 'mcb',       label: 'MCBs Type B/C/D' },
+      { key: 'rccb',      label: 'RCCBs & RCBOs' },
+      { key: 'isolators', label: 'Isolators' },
+      { key: 'db',        label: 'Distribution Boards' },
+      { key: 'surge',     label: 'Surge Protection' },
+      { key: 'fuses',     label: 'Fuses & Holders' },
+    ],
+    'industrial-controls': [
+      { key: 'starters',   label: 'Motor Starters DOL' },
+      { key: 'contactors', label: 'Contactors' },
+      { key: 'relays',     label: 'Relays & Timers' },
+      { key: 'vsd',        label: 'Variable Speed Drives' },
+      { key: 'enclosures', label: 'Enclosures & Cabinets' },
+      { key: 'pushbutton', label: 'Pushbutton Devices' },
+    ],
+    'fire-security': [
+      { key: 'smoke',     label: 'Smoke & Heat Detectors' },
+      { key: 'co',        label: 'CO Detectors' },
+      { key: 'panels',    label: 'Fire Alarm Panels' },
+      { key: 'emergency', label: 'Emergency Lighting' },
+      { key: 'exit',      label: 'Exit & Safety Signs' },
+      { key: 'cctv',      label: 'CCTV & Cameras' },
+      { key: 'access',    label: 'Access Control' },
+    ],
+    'tools-fixings': [
+      { key: 'hand',        label: 'Hand Tools' },
+      { key: 'test',        label: 'Test & Measurement' },
+      { key: 'cable-tools', label: 'Cable Strippers & Cutters' },
+      { key: 'crimp',       label: 'Crimping Tools' },
+      { key: 'fish',        label: 'Fish Rods & Draw Tapes' },
+      { key: 'ties',        label: 'Cable Ties & Fixings' },
+      { key: 'connectors',  label: 'Wire Connectors' },
+    ],
+  };
+
+  const activeSub = params.get('sub');
+  const subcatsNav = document.getElementById('subcats-nav');
+  if (SUBCATS[cat] && subcatsNav) {
+    const meta = CATEGORY_META[cat];
+    let html = `<a href="category.html?cat=${cat}" class="subcat-pill${!activeSub ? ' active' : ''}">All ${meta ? meta.title : ''}</a>`;
+    SUBCATS[cat].forEach(sub => {
+      const isActive = activeSub === sub.key;
+      html += `<a href="category.html?cat=${cat}&sub=${sub.key}" class="subcat-pill${isActive ? ' active' : ''}">${sub.label}</a>`;
+    });
+    subcatsNav.innerHTML = html;
+  }
 });
 </script>
 </body>
