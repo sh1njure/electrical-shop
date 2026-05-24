@@ -566,29 +566,19 @@ svg { flex-shrink: 0; }
 /* ── Nav item simple dropdown ─────────────────────────────── */
 .nav-item-has-dropdown { position: relative; }
 .nav-dropdown {
+  display: none;
   position: absolute;
-  top: calc(100% + 2px);
+  top: 100%;
   left: 0;
   min-width: 220px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 0 0 var(--radius) var(--radius);
   box-shadow: var(--shadow-lg);
   padding: 6px 0;
-  z-index: 300;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-6px);
-  transition: opacity .15s, transform .15s, visibility 0s .15s;
+  z-index: 400;
 }
-.nav-item-has-dropdown:hover .nav-dropdown {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-  transition: opacity .15s, transform .15s, visibility 0s 0s;
-}
+.nav-dropdown.open { display: block; }
 .nav-dropdown-link {
   display: block;
   padding: 7px 16px;

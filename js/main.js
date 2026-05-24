@@ -235,6 +235,22 @@ function initMegaMenu() {
   });
 }
 
+/* ── Nav Dropdowns ────────────────────────────────────────── */
+function initNavDropdowns() {
+  document.querySelectorAll('.nav-item-has-dropdown').forEach(item => {
+    const menu = item.querySelector('.nav-dropdown');
+    if (!menu) return;
+    let timer;
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(timer);
+      menu.classList.add('open');
+    });
+    item.addEventListener('mouseleave', () => {
+      timer = setTimeout(() => menu.classList.remove('open'), 150);
+    });
+  });
+}
+
 /* ── Newsletter ───────────────────────────────────────────── */
 function initNewsletter() {
   const form = document.getElementById('newsletter-form');
@@ -363,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMiniCart();
   initSearch();
   initMegaMenu();
+  initNavDropdowns();
   initNewsletter();
   initFeaturedProducts();
   initSmoothScroll();
