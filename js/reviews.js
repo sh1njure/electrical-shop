@@ -1,6 +1,6 @@
 /* ── Supabase config ── paste your values from Settings → API ── */
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';          // e.g. https://xxxx.supabase.co
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // anon public key
+const SUPABASE_URL = 'https://ocprpfijgfwcikhifxys.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Hvvd-s6Qb4bsB3u8NxZEaA_AkyMSCTA';
 
 /* ─────────────────────────────────────────────────────────────── */
 const Reviews = (() => {
