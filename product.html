@@ -393,9 +393,47 @@
 
     <!-- Related Products -->
     <div class="section" style="border-top:1px solid var(--border);padding-top:48px">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Related Products</h2>
+      <!-- ── Customer Reviews ────────────────────────────────── -->
+      <div style="margin-top:48px;margin-bottom:48px">
+        <div class="reviews-section-header">
+          <div class="reviews-summary">
+            <div id="reviews-avg-stars" style="display:flex;gap:2px"></div>
+            <span id="reviews-avg-num" class="reviews-avg-num"></span>
+            <span id="reviews-count" class="reviews-count-text">0 reviews</span>
+          </div>
+          <button id="write-review-btn" class="btn btn-primary btn-sm">Write a Review</button>
+        </div>
+
+        <div id="review-form-wrap" style="display:none">
+          <form id="review-form" class="review-form" novalidate>
+            <h3 class="review-form-title">Your Review</h3>
+            <div class="review-form-grid">
+              <div class="review-field">
+                <label class="review-label">Your Name *</label>
+                <input type="text" name="name" class="review-input" placeholder="e.g. John Murphy" autocomplete="name">
+              </div>
+              <div class="review-field">
+                <label class="review-label">Rating *</label>
+                <div class="star-picker"></div>
+                <input type="hidden" name="rating" value="0">
+              </div>
+            </div>
+            <div class="review-field">
+              <label class="review-label">Review Title</label>
+              <input type="text" name="title" class="review-input" placeholder="Summarise your experience in a few words">
+            </div>
+            <div class="review-field">
+              <label class="review-label">Review *</label>
+              <textarea name="body" class="review-input review-textarea" rows="4" placeholder="What did you think? Quality, ease of installation, value for money…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Review</button>
+          </form>
+        </div>
+
+        <div id="reviews-list"></div>
+      </div>
+
+      <!-- ── Related Products ──────────────────────────────── -->
           <p class="section-subtitle mb-0">Customers also viewed</p>
         </div>
       </div>
@@ -470,6 +508,7 @@
 <script src="js/cart.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/main.js"></script>
+<script src="js/reviews.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -547,6 +586,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
   const relatedGrid = document.getElementById('related-grid');
   if (relatedGrid) relatedGrid.innerHTML = related.map(p => Filters.renderProductCard(p)).join('');
+
+  /* Reviews */
+  Reviews.renderList(product.id);
+  Reviews.initForm(product.id);
 });
 </script>
 </body>
