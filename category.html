@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Lighting — VoltPro Electrical</title>
+  <meta name="description" content="Browse VoltPro's full range of LED lighting — panels, downlights, battens, floodlights and more. Trade prices, next-day delivery.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header id="main-header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-top-inner">
+        <div class="header-top-left">
+          <a href="tel:+35318001234" class="header-top-link">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 013 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +353 1 800 1234
+          </a>
+          <a href="mailto:sales@voltpro.ie" class="header-top-link">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            sales@voltpro.ie
+          </a>
+        </div>
+        <p class="header-top-promo">&#9889; Free next-day delivery on orders over €150 ex. VAT</p>
+        <div class="header-top-right">
+          <a href="cart.html" class="header-top-link">Trade Account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="container">
+      <div class="header-main-inner">
+        <button id="burger-btn" aria-label="Open menu" aria-expanded="false">
+          <span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span>
+        </button>
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <span class="logo-text">Volt<em>Pro</em></span>
+        </a>
+        <div class="search-wrapper">
+          <div class="search-bar">
+            <input type="text" id="header-search" placeholder="Search products, brands, SKUs&hellip;" autocomplete="off">
+            <button class="search-btn" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+          </div>
+          <div id="search-dropdown" class="search-dropdown"></div>
+        </div>
+        <div class="header-icons">
+          <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+            <svg class="dark-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg class="dark-icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="#" class="header-icon-btn" aria-label="Account"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+          <button id="cart-icon-btn" class="header-icon-btn" aria-label="Cart">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="cart-count" style="display:none">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="main-nav-inner">
+        <ul class="nav-list">
+          <li class="nav-item nav-item-has-mega">
+            <a href="category.html" class="nav-link">Products <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></a>
+            <div class="mega-menu">
+              <div class="mega-menu-grid">
+                <div class="mega-menu-col">
+                  <p class="mega-menu-col-title">Lighting</p>
+                  <a href="category.html?cat=showroom-lighting" class="mega-menu-link"><span class="mega-menu-link-icon">&#128262;</span>Showroom Lighting</a>
+                  <a href="category.html?cat=led-lighting" class="mega-menu-link"><span class="mega-menu-link-icon">&#128161;</span>LED Lighting</a>
+                  <p class="mega-menu-col-title" style="margin-top:16px">Wiring &amp; Cable</p>
+                  <a href="category.html?cat=wiring-accessories" class="mega-menu-link"><span class="mega-menu-link-icon">&#128268;</span>Wiring Accessories</a>
+                  <a href="category.html?cat=cable" class="mega-menu-link"><span class="mega-menu-link-icon">&#128279;</span>Cable</a>
+                  <a href="category.html?cat=cable-management" class="mega-menu-link"><span class="mega-menu-link-icon">&#128230;</span>Cable Management</a>
+                </div>
+                <div class="mega-menu-col">
+                  <p class="mega-menu-col-title">Distribution &amp; Control</p>
+                  <a href="category.html?cat=switchgear" class="mega-menu-link"><span class="mega-menu-link-icon">&#9889;</span>Switchgear &amp; Distribution</a>
+                  <a href="category.html?cat=industrial-controls" class="mega-menu-link"><span class="mega-menu-link-icon">&#127981;</span>Industrial Controls</a>
+                  <p class="mega-menu-col-title" style="margin-top:16px">Other</p>
+                  <a href="category.html?cat=heating-ventilation" class="mega-menu-link"><span class="mega-menu-link-icon">&#127777;&#65039;</span>Heating &amp; Ventilation</a>
+                  <a href="category.html?cat=fire-security" class="mega-menu-link"><span class="mega-menu-link-icon">&#128293;</span>Fire / Security / Safety</a>
+                  <a href="category.html?cat=tools-fixings" class="mega-menu-link"><span class="mega-menu-link-icon">&#128295;</span>Tools &amp; Fixings</a>
+                </div>
+                <div class="mega-menu-col">
+                  <p class="mega-menu-col-title">Top Brands</p>
+                  <a href="category.html?brand=Voltex" class="mega-menu-link">Voltex</a>
+                  <a href="category.html?brand=LumiTech" class="mega-menu-link">LumiTech</a>
+                  <a href="category.html?brand=PowerCore" class="mega-menu-link">PowerCore</a>
+                  <a href="category.html?brand=ShieldMax" class="mega-menu-link">ShieldMax</a>
+                  <a href="category.html?brand=CableMaster" class="mega-menu-link">CableMaster</a>
+                  <a href="category.html?brand=ElectroPro" class="mega-menu-link">ElectroPro</a>
+                </div>
+              </div>
+              <div class="mega-menu-promo">
+                <div class="mega-menu-promo-content">
+                  <p class="mega-menu-promo-tag">New Range</p>
+                  <h3>EV Charging Solutions</h3>
+                  <p>Home &amp; commercial EV chargers, cables &amp; accessories</p>
+                  <a href="category.html" class="btn btn-primary btn-sm">Shop Now &rarr;</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"><a href="category.html?cat=led-lighting" class="nav-link">LED Lighting</a></li>
+          <li class="nav-item"><a href="category.html?cat=cable" class="nav-link">Cable</a></li>
+          <li class="nav-item"><a href="category.html?cat=wiring-accessories" class="nav-link">Wiring</a></li>
+          <li class="nav-item"><a href="category.html?cat=switchgear" class="nav-link">Switchgear</a></li>
+          <li class="nav-item"><a href="category.html?cat=tools-fixings" class="nav-link">Tools</a></li>
+          <li class="nav-item"><a href="cart.html" class="nav-link" style="color:var(--accent);font-weight:700">Trade Account</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Nav -->
+<nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="logo" style="font-size:18px"><div class="logo-icon" style="width:32px;height:32px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><span class="logo-text">Volt<em>Pro</em></span></a>
+    <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="mobile-nav-body">
+    <div class="mobile-nav-parent">
+      <button class="mobile-nav-toggle">Products <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <div class="mobile-nav-submenu">
+        <a href="category.html?cat=led-lighting">LED Lighting</a>
+        <a href="category.html?cat=wiring-accessories">Wiring Accessories</a>
+        <a href="category.html?cat=cable">Cable</a>
+        <a href="category.html?cat=switchgear">Switchgear &amp; Distribution</a>
+        <a href="category.html?cat=tools-fixings">Tools &amp; Fixings</a>
+        <a href="category.html?cat=heating-ventilation">Heating &amp; Ventilation</a>
+        <a href="category.html?cat=fire-security">Fire / Security / Safety</a>
+        <a href="category.html?cat=cable-management">Cable Management</a>
+        <a href="category.html?cat=industrial-controls">Industrial Controls</a>
+        <a href="category.html?cat=showroom-lighting">Showroom Lighting</a>
+      </div>
+    </div>
+    <a href="cart.html" class="mobile-nav-link" style="color:var(--accent)">Trade Account</a>
+    <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+  </div>
+  <div class="mobile-nav-footer">
+    <p class="mobile-nav-contact">Call us free on</p>
+    <p class="mobile-nav-phone">+353 1 800 1234</p>
+  </div>
+</nav>
+
+<!-- Mini Cart -->
+<aside id="cart-sidebar" aria-label="Shopping cart">
+  <div class="cart-sidebar-header">
+    <span class="cart-sidebar-title">Your Cart</span>
+    <button id="cart-sidebar-close" class="cart-sidebar-close" aria-label="Close cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div id="mini-cart-items"></div>
+  <div class="cart-sidebar-footer">
+    <div class="cart-sidebar-subtotal"><span>Subtotal (ex. VAT)</span><span id="mini-cart-total">€0.00</span></div>
+    <p class="cart-sidebar-note">Free delivery on orders over €150 ex. VAT</p>
+    <div class="cart-sidebar-actions">
+      <a href="cart.html" class="btn btn-primary btn-block">View Cart &amp; Checkout</a>
+      <button onclick="document.getElementById('cart-sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('active');document.body.classList.remove('no-scroll')" class="btn btn-ghost btn-block">Continue Shopping</button>
+    </div>
+  </div>
+</aside>
+
+<div id="overlay"></div>
+
+<!-- ═══════════════════════ MAIN ═══════════════════════ -->
+<main>
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current" id="breadcrumb-current">LED Lighting</span>
+    </nav>
+
+    <!-- Category Layout -->
+    <div class="category-layout">
+
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar" id="filter-sidebar">
+        <div class="filter-sidebar-header">
+          <h2>Filter Products</h2>
+          <button id="clear-filters" class="btn btn-ghost btn-sm">Clear All</button>
+        </div>
+
+        <!-- Product search -->
+        <div style="padding:12px 20px;border-bottom:1px solid var(--border)">
+          <div class="product-search-bar">
+            <input type="text" id="product-search" placeholder="Search within results&hellip;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+          <div class="filter-group-header">
+            Price Range
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          </div>
+          <div class="filter-group-body">
+            <div class="price-range-wrapper">
+              <div class="price-range-display"><span>€0</span><span id="price-display">€200</span></div>
+              <input type="range" id="price-range" min="0" max="200" value="200" step="5">
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand -->
+        <div class="filter-group">
+          <div class="filter-group-header">
+            Brand
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          </div>
+          <div class="filter-group-body" id="brand-filters">
+            <!-- Populated by filters.js -->
+          </div>
+        </div>
+
+        <!-- Color -->
+        <div class="filter-group">
+          <div class="filter-group-header">
+            Colour
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          </div>
+          <div class="filter-group-body" id="color-filters">
+            <!-- Populated by filters.js -->
+          </div>
+        </div>
+
+        <!-- IP Rating -->
+        <div class="filter-group">
+          <div class="filter-group-header">
+            IP Rating
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          </div>
+          <div class="filter-group-body" id="ip-filters">
+            <!-- Populated by filters.js -->
+          </div>
+        </div>
+
+        <!-- Stock -->
+        <div class="filter-group">
+          <div class="filter-group-header">In Stock Only</div>
+          <div class="filter-group-body">
+            <label class="filter-checkbox">
+              <input type="checkbox" id="in-stock-only">
+              <span class="checkmark"></span>
+              Show in-stock items only
+            </label>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Product Content -->
+      <div class="category-content">
+
+        <!-- Category header -->
+        <div style="margin-bottom:20px">
+          <h1 id="category-title" style="font-size:24px;font-weight:800;margin-bottom:4px">LED Lighting</h1>
+          <p id="category-desc" style="font-size:14px;color:var(--text-secondary)">Professional LED lighting solutions for every application — panels, downlights, battens, high bays, floodlights and more.</p>
+        </div>
+
+        <!-- Active filter chips -->
+        <div class="active-filters-bar" id="active-filters">
+          <button id="clear-all-chips" class="btn btn-ghost btn-sm" style="display:none">Clear All Filters</button>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="category-toolbar">
+          <div class="toolbar-left">
+            <button class="filter-toggle-btn" id="filter-toggle-btn" onclick="document.getElementById('filter-sidebar').classList.toggle('filter-open')">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+              Filters
+            </button>
+            <span id="product-count" style="font-size:13px;color:var(--text-secondary)"></span>
+          </div>
+          <div class="toolbar-right">
+            <div class="sort-select-wrapper">
+              <select id="sort-select" aria-label="Sort by">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="rating">Top Rated</option>
+              </select>
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="view-btn" data-view="list" aria-label="List view">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+          <!-- Populated by filters.js -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer id="contact">
+  <div class="footer-newsletter">
+    <div class="container">
+      <div class="footer-newsletter-inner">
+        <div class="footer-newsletter-text">
+          <h3>Stay in the loop</h3>
+          <p>New products, exclusive deals &mdash; straight to your inbox</p>
+        </div>
+        <form class="footer-newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="logo-icon" style="width:34px;height:34px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><span>Volt<em style="color:var(--accent);font-style:normal">Pro</em></span></div>
+          <p class="footer-desc">Ireland's leading independent wholesale electrical supplier. Serving trade professionals since 1993.</p>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 013 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+35318001234">+353 1 800 1234</a></div>
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Unit 12, Westpark Business Estate, Dublin 12</div>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Products</p>
+          <a href="category.html?cat=led-lighting" class="footer-link">LED Lighting</a>
+          <a href="category.html?cat=wiring-accessories" class="footer-link">Wiring Accessories</a>
+          <a href="category.html?cat=cable" class="footer-link">Cable</a>
+          <a href="category.html?cat=switchgear" class="footer-link">Switchgear &amp; Distribution</a>
+          <a href="category.html?cat=tools-fixings" class="footer-link">Tools &amp; Fixings</a>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <a href="#" class="footer-link">About VoltPro</a>
+          <a href="cart.html" class="footer-link">Trade Account</a>
+          <a href="#" class="footer-link">Careers</a>
+          <a href="index.html#contact" class="footer-link">Contact Us</a>
+        </div>
+        <div>
+          <p class="footer-col-title">Support</p>
+          <a href="#" class="footer-link">Track Your Order</a>
+          <a href="#" class="footer-link">Returns &amp; Refunds</a>
+          <a href="#" class="footer-link">Technical Support</a>
+          <a href="#" class="footer-link">FAQs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <p class="footer-copyright">&copy; 2025 VoltPro Electrical Ltd. Registered in Ireland. VAT No. IE1234567A</p>
+        <div class="footer-legal-links"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Cookie Policy</a></div>
+        <div class="payment-icons"><span class="payment-icon">VISA</span><span class="payment-icon">MC</span><span class="payment-icon">SEPA</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script src="js/cart.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/main.js"></script>
+<script>
+/* Category page init */
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat') || 'led-lighting';
+  const brand = params.get('brand');
+  const search = params.get('search');
+
+  const CATEGORY_META = {
+    'led-lighting':        { title: 'LED Lighting',                desc: 'Professional LED lighting solutions — panels, downlights, battens, high bays, floodlights and more.' },
+    'wiring-accessories':  { title: 'Wiring Accessories',          desc: 'Switches, sockets, dimmers, extension leads and more from Ireland\'s leading brands.' },
+    'cable':               { title: 'Cable',                       desc: 'Twin & earth, SWA armoured, flexible, data and coaxial cables in a full range of sizes.' },
+    'switchgear':          { title: 'Switchgear & Distribution',   desc: 'Consumer units, MCBs, RCCBs, isolators and distribution boards for residential and commercial installations.' },
+    'tools-fixings':       { title: 'Tools & Fixings',             desc: 'Professional electrical hand tools, test equipment, cable ties, conduit fittings and installation accessories.' },
+    'heating-ventilation': { title: 'Heating & Ventilation',       desc: 'Electric heaters, fans, extractor fans, thermostats and ventilation solutions.' },
+    'fire-security':       { title: 'Fire / Security / Safety',    desc: 'Smoke alarms, CO detectors, security cameras, access control and emergency lighting.' },
+    'cable-management':    { title: 'Cable Management',            desc: 'Trunking, conduit, cable trays, cable ladders and accessories for neat and safe cable routing.' },
+    'industrial-controls': { title: 'Industrial Controls',         desc: 'Motor starters, contactors, relays, PLCs and industrial automation components.' },
+    'showroom-lighting':   { title: 'Showroom Lighting',           desc: 'Premium decorative and display lighting including track systems, pendants and adjustable spotlights.' },
+  };
+
+  let products = PRODUCTS;
+  let pageTitle = 'All Products';
+  let pageDesc = 'Browse our full range of professional electrical supplies.';
+
+  if (brand) {
+    products = PRODUCTS.filter(p => p.brand === brand);
+    pageTitle = brand + ' Products';
+    pageDesc = 'Browse all products from ' + brand;
+    document.getElementById('breadcrumb-current').textContent = brand;
+  } else if (search) {
+    const q = search.toLowerCase();
+    products = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q));
+    pageTitle = 'Search results for "' + search + '"';
+    pageDesc = products.length + ' products found';
+    document.getElementById('breadcrumb-current').textContent = 'Search: ' + search;
+  } else if (CATEGORY_META[cat]) {
+    products = PRODUCTS.filter(p => p.category === cat);
+    pageTitle = CATEGORY_META[cat].title;
+    pageDesc = CATEGORY_META[cat].desc;
+    document.getElementById('breadcrumb-current').textContent = CATEGORY_META[cat].title;
+  }
+
+  document.getElementById('category-title').textContent = pageTitle;
+  document.getElementById('category-desc').textContent = pageDesc;
+  document.title = pageTitle + ' — VoltPro Electrical';
+
+  /* If no products in this category, show a mix */
+  if (products.length === 0) products = PRODUCTS.slice(0, 12);
+
+  Filters.init(products);
+});
+</script>
+</body>
+</html>
