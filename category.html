@@ -483,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cat = params.get('cat') || 'led-lighting';
   const brand = params.get('brand');
   const search = params.get('search');
+  const activeSub = params.get('sub');
 
   const CATEGORY_META = {
     'led-lighting':        { title: 'LED Lighting',                desc: 'Professional LED lighting solutions — panels, downlights, battens, high bays, floodlights and more.' },
@@ -519,12 +520,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('breadcrumb-current').textContent = CATEGORY_META[cat].title;
   }
 
+  /* Filter by subcategory when ?sub= is present */
+  if (activeSub && !brand && !search) {
+    const subFiltered = products.filter(p => p.sub === activeSub);
+    if (subFiltered.length > 0) products = subFiltered;
+  }
+
   document.getElementById('category-title').textContent = pageTitle;
   document.getElementById('category-desc').textContent = pageDesc;
   document.title = pageTitle + ' — VoltPro Electrical';
-
-  /* If no products in this category, show a mix */
-  if (products.length === 0) products = PRODUCTS.slice(0, 12);
 
   Filters.init(products);
 
@@ -618,7 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
   };
 
-  const activeSub = params.get('sub');
   const subcatsNav = document.getElementById('subcats-nav');
   if (SUBCATS[cat] && subcatsNav) {
     const meta = CATEGORY_META[cat];
@@ -628,6 +631,17 @@ document.addEventListener('DOMContentLoaded', () => {
       html += `<a href="category.html?cat=${cat}&sub=${sub.key}" class="subcat-pill${isActive ? ' active' : ''}">${sub.label}</a>`;
     });
     subcatsNav.innerHTML = html;
+
+    /* Update page title and breadcrumb to reflect the active subcategory */
+    if (activeSub) {
+      const activeSubData = SUBCATS[cat].find(s => s.key === activeSub);
+      if (activeSubData) {
+        const fullTitle = activeSubData.label + ' — ' + (meta ? meta.title : '');
+        document.getElementById('category-title').textContent = fullTitle;
+        document.title = fullTitle + ' — VoltPro Electrical';
+        document.getElementById('breadcrumb-current').textContent = activeSubData.label;
+      }
+    }
   }
 });
 </script>
