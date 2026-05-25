@@ -38,7 +38,7 @@ const Reviews = (() => {
   }
 
   /* ── LocalStorage fallback (when Supabase not configured) ────── */
-  const LS_KEY = 'voltpro_reviews';
+  const LS_KEY = 'wcew_reviews';
   function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; } }
   function localGet(pid) { return (lsLoad()[pid] || []).slice().sort((a, b) => b.id - a.id); }
   function localAdd(pid, data) {
