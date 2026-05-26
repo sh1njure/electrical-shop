@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In / Register — WCEW Electrical</title>
+  <meta name="description" content="Sign in or create an account at WCEW Electrical — Ireland's leading electrical wholesaler.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header id="main-header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-top-inner">
+        <div class="header-top-left">
+          <a href="tel:+35318001234" class="header-top-link"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 013 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+353 1 800 1234</a>
+          <a href="mailto:sales@wcew.ie" class="header-top-link"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>sales@wcew.ie</a>
+        </div>
+        <p class="header-top-promo">&#9889; Free next-day delivery on orders over €150 ex. VAT</p>
+        <div class="header-top-right"><a href="cart.html" class="header-top-link">Trade Account</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="container">
+      <div class="header-main-inner">
+        <button id="burger-btn" aria-label="Open menu" aria-expanded="false"><span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <span class="logo-text">WCE<em>W</em></span>
+        </a>
+        <div class="search-wrapper">
+          <div class="search-bar">
+            <input type="text" id="header-search" placeholder="Search products, brands, SKUs&hellip;" autocomplete="off">
+            <button class="search-btn" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+          </div>
+          <div id="search-dropdown" class="search-dropdown"></div>
+        </div>
+        <div class="header-icons">
+          <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+            <svg class="dark-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg class="dark-icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="auth.html" id="account-btn" class="header-icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </a>
+          <button id="cart-icon-btn" class="header-icon-btn" aria-label="Cart">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="cart-count" style="display:none">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="main-nav-inner">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="category.html" class="nav-link">Products</a></li>
+          <li class="nav-item"><a href="category.html?cat=led-lighting" class="nav-link">LED Lighting</a></li>
+          <li class="nav-item"><a href="category.html?cat=wiring-accessories" class="nav-link">Wiring</a></li>
+          <li class="nav-item"><a href="category.html?cat=cable" class="nav-link">Cable</a></li>
+          <li class="nav-item"><a href="category.html?cat=switchgear" class="nav-link">Switchgear</a></li>
+          <li class="nav-item"><a href="category.html?cat=tools" class="nav-link">Tools</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- Mobile nav overlay -->
+<div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
+<aside id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+  <div class="mobile-nav-header">
+    <span class="logo-text">WCE<em>W</em></span>
+    <button id="mobile-nav-close" aria-label="Close menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="category.html" class="mobile-nav-link">All Products</a></li>
+    <li><a href="category.html?cat=led-lighting" class="mobile-nav-link">LED Lighting</a></li>
+    <li><a href="category.html?cat=wiring-accessories" class="mobile-nav-link">Wiring Accessories</a></li>
+    <li><a href="category.html?cat=cable" class="mobile-nav-link">Cable &amp; Wire</a></li>
+    <li><a href="category.html?cat=switchgear" class="mobile-nav-link">Switchgear</a></li>
+    <li><a href="category.html?cat=tools" class="mobile-nav-link">Tools &amp; Test</a></li>
+    <li><a href="cart.html" class="mobile-nav-link">Cart</a></li>
+    <li><a href="auth.html" class="mobile-nav-link">Account</a></li>
+  </ul>
+</aside>
+
+<!-- ═══════════════════════ MAIN ═══════════════════════ -->
+<main class="auth-page">
+  <div class="auth-card" id="auth-card">
+
+    <!-- Header -->
+    <div class="auth-card-header">
+      <a href="index.html" class="auth-card-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <span class="logo-text">WCE<em>W</em></span>
+      </a>
+      <p class="auth-card-tagline">Ireland's Leading Electrical Wholesaler</p>
+    </div>
+
+    <!-- ── Logged-in panel (shown when user is authenticated) ── -->
+    <div id="account-panel" class="account-panel" style="display:none">
+      <div id="acct-avatar" class="account-avatar">U</div>
+      <div id="acct-name" class="account-name">User</div>
+      <div id="acct-email" class="account-email">user@example.com</div>
+      <div class="account-info-grid">
+        <div class="account-info-item">
+          <div class="account-info-label">Member Since</div>
+          <div id="acct-since" class="account-info-value">—</div>
+        </div>
+        <div class="account-info-item">
+          <div class="account-info-label">Account Type</div>
+          <div class="account-info-value">Trade</div>
+        </div>
+      </div>
+      <button class="account-logout" id="logout-btn">Sign Out</button>
+    </div>
+
+    <!-- ── Auth tabs + forms (shown when not logged in) ── -->
+    <div id="auth-forms">
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Sign In</button>
+        <button class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+
+      <!-- Sign In -->
+      <div class="auth-body">
+        <div id="panel-login" class="auth-panel active">
+          <div id="login-msg" class="auth-msg"></div>
+          <form id="login-form" novalidate>
+            <div class="auth-field">
+              <label for="login-email">Email Address</label>
+              <input type="email" id="login-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="auth-field">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" name="password" placeholder="Your password" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="auth-submit">Sign In</button>
+          </form>
+          <div class="auth-footer-link">
+            No account? <a href="#" data-switch="register">Create one free</a>
+          </div>
+        </div>
+
+        <!-- Create Account -->
+        <div id="panel-register" class="auth-panel">
+          <div id="register-msg" class="auth-msg"></div>
+          <form id="register-form" novalidate>
+            <div class="auth-field">
+              <label for="reg-name">Full Name</label>
+              <input type="text" id="reg-name" name="name" placeholder="John Smith" autocomplete="name" required>
+            </div>
+            <div class="auth-field">
+              <label for="reg-email">Email Address</label>
+              <input type="email" id="reg-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="auth-field">
+              <label for="reg-password">Password</label>
+              <input type="password" id="reg-password" name="password" placeholder="At least 6 characters" autocomplete="new-password" required>
+            </div>
+            <div class="auth-field">
+              <label for="reg-confirm">Confirm Password</label>
+              <input type="password" id="reg-confirm" name="confirm" placeholder="Repeat password" autocomplete="new-password" required>
+            </div>
+            <button type="submit" class="auth-submit">Create Account</button>
+          </form>
+          <div class="auth-footer-link">
+            Already have an account? <a href="#" data-switch="login">Sign in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo footer-logo">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <span class="logo-text">WCE<em style="color:var(--accent);font-style:normal">W</em></span>
+        </a>
+        <p class="footer-desc">Ireland's leading electrical wholesaler. Quality products, trade prices, next-day delivery nationwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Products</h4>
+        <ul class="footer-links">
+          <li><a href="category.html?cat=led-lighting">LED Lighting</a></li>
+          <li><a href="category.html?cat=wiring-accessories">Wiring Accessories</a></li>
+          <li><a href="category.html?cat=cable">Cable &amp; Wire</a></li>
+          <li><a href="category.html?cat=switchgear">Switchgear</a></li>
+          <li><a href="category.html?cat=tools">Tools &amp; Test</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Account</h4>
+        <ul class="footer-links">
+          <li><a href="auth.html">Sign In</a></li>
+          <li><a href="auth.html">Create Account</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+35318001234">+353 1 800 1234</a></li>
+          <li><a href="mailto:sales@wcew.ie">sales@wcew.ie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 WCEW Electrical Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const user = Auth.getUser();
+
+  if (user) {
+    document.getElementById('auth-forms').style.display = 'none';
+    const panel = document.getElementById('account-panel');
+    panel.style.display = 'block';
+    document.getElementById('acct-avatar').textContent = user.name.charAt(0).toUpperCase();
+    document.getElementById('acct-name').textContent = user.name;
+    document.getElementById('acct-email').textContent = user.email;
+    const users = JSON.parse(localStorage.getItem('wcew_users') || '[]');
+    const full = users.find(u => u.email === user.email);
+    if (full && full.createdAt) {
+      document.getElementById('acct-since').textContent = new Date(full.createdAt).toLocaleDateString('en-IE', { month: 'short', year: 'numeric' });
+    }
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      Auth.logout();
+      window.location.reload();
+    });
+    return;
+  }
+
+  // Tab switching
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+  document.querySelectorAll('[data-switch]').forEach(link => {
+    link.addEventListener('click', e => { e.preventDefault(); switchTab(link.dataset.switch); });
+  });
+
+  function switchTab(name) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  }
+
+  function showMsg(el, type, text) {
+    el.className = 'auth-msg ' + type + ' show';
+    el.textContent = text;
+  }
+
+  // Login
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = document.getElementById('login-msg');
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) return showMsg(msg, 'error', 'Please fill in all fields.');
+    const result = Auth.login({ email, password });
+    if (!result.ok) return showMsg(msg, 'error', result.error);
+    showMsg(msg, 'success', 'Signed in successfully. Redirecting…');
+    setTimeout(() => window.location.reload(), 800);
+  });
+
+  // Register
+  document.getElementById('register-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = document.getElementById('register-msg');
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const confirm = document.getElementById('reg-confirm').value;
+    if (!name || !email || !password || !confirm) return showMsg(msg, 'error', 'Please fill in all fields.');
+    if (password.length < 6) return showMsg(msg, 'error', 'Password must be at least 6 characters.');
+    if (password !== confirm) return showMsg(msg, 'error', 'Passwords do not match.');
+    const result = Auth.register({ name, email, password });
+    if (!result.ok) return showMsg(msg, 'error', result.error);
+    showMsg(msg, 'success', 'Account created! Signing you in…');
+    setTimeout(() => window.location.reload(), 800);
+  });
+});
+</script>
+</body>
+</html>
