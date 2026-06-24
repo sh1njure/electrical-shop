@@ -64,8 +64,8 @@ const Reviews = (() => {
     const star = '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
     let html = '';
     for (let i = 1; i <= 5; i++) {
-      const fill = i <= Math.floor(rating) ? '#f97316'
-        : (rating - Math.floor(rating) >= 0.5 && i === Math.floor(rating) + 1 ? '#f9a04c' : '#d1d5db');
+      const fill = i <= Math.floor(rating) ? '#2CCC81'
+        : (rating - Math.floor(rating) >= 0.5 && i === Math.floor(rating) + 1 ? '#68dba9' : '#d1d5db');
       html += '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + fill + '" stroke="none">' + star + '</svg>';
     }
     return html;
@@ -128,7 +128,7 @@ const Reviews = (() => {
   /* ── Star picker ─────────────────────────────────────────────── */
   function highlightStars(container, n) {
     container.querySelectorAll('button svg').forEach((svg, i) => {
-      svg.setAttribute('fill', i < n ? '#f97316' : '#d1d5db');
+      svg.setAttribute('fill', i < n ? '#2CCC81' : '#d1d5db');
     });
   }
 
