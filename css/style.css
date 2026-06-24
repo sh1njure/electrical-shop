@@ -212,11 +212,8 @@ svg { flex-shrink: 0; }
 .logo-icon {
   width: 40px;
   height: 40px;
-  background: var(--accent);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  flex-shrink: 0;
 }
 .logo-text em { color: var(--accent); font-style: normal; }
 
@@ -2010,7 +2007,7 @@ footer {
 .auth-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; max-width: 440px; overflow: hidden; }
 .auth-card-header { background: var(--primary); padding: 32px 36px 24px; text-align: center; }
 .auth-card-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; text-decoration: none; }
-.auth-card-logo .logo-icon { width: 34px; height: 34px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.auth-card-logo .logo-icon { width: 34px; height: 34px; display: block; flex-shrink: 0; }
 .auth-card-logo .logo-text { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.5px; }
 .auth-card-logo .logo-text em { color: var(--accent); font-style: normal; }
 .auth-card-tagline { color: rgba(255,255,255,.65); font-size: 13px; }
